@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>정지훈 | Software Testing Engineer Portfolio Mockup</title>
+  <style>
+    :root {
+      --bg: #121315;
+      --panel: #1b1d21;
+      --panel-2: #22252b;
+      --text: #f6f8fb;
+      --muted: #aab2c0;
+      --line: rgba(255,255,255,.12);
+      --blue: #3f8cff;
+      --blue-2: #67b0ff;
+      --white: #ffffff;
+      --soft: #f6f8fc;
+      --ink: #191b1f;
+      --gray: #657181;
+      --green: #30c171;
+      --orange: #ffb454;
+      --red: #ff6262;
+      --radius: 24px;
+      --shadow: 0 22px 70px rgba(0,0,0,.22);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--soft);
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(18,19,21,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .topbar .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      min-height: 68px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      font-weight: 900;
+      letter-spacing: -.02em;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue), #7fd3ff);
+      color: #fff;
+      box-shadow: 0 12px 32px rgba(63,140,255,.3);
+    }
+    nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    nav a {
+      color: rgba(255,255,255,.72);
+      font-size: 14px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      transition: .2s ease;
+    }
+    nav a:hover,
+    nav a.active {
+      color: #fff;
+      background: rgba(63,140,255,.18);
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 78% 10%, rgba(63,140,255,.28), transparent 35%),
+        linear-gradient(135deg, #15171a 0%, #111316 58%, #1c2432 100%);
+      color: var(--text);
+      min-height: 720px;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::after {
+      content: "QA";
+      position: absolute;
+      right: -20px;
+      bottom: -110px;
+      font-size: clamp(140px, 24vw, 320px);
+      font-weight: 950;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255,255,255,.08);
+      letter-spacing: -.08em;
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      padding: 72px 0 96px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: #d9e8ff;
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue-2);
+      box-shadow: 0 0 0 6px rgba(63,140,255,.16);
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(46px, 7vw, 86px);
+      line-height: 1.03;
+      letter-spacing: -.07em;
+      font-weight: 950;
+    }
+    .hero h1 .blue { color: var(--blue); }
+    .hero p {
+      width: min(680px, 100%);
+      margin: 26px 0 0;
+      color: rgba(255,255,255,.76);
+      font-size: 18px;
+      word-break: keep-all;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      font-weight: 850;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform .18s ease, background .18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); background: rgba(255,255,255,.13); }
+    .btn.primary { background: var(--blue); border-color: var(--blue); box-shadow: 0 16px 36px rgba(63,140,255,.28); }
+    .id-card {
+      position: relative;
+      max-width: 390px;
+      margin-left: auto;
+      border-radius: 34px;
+      background: #fff;
+      color: var(--ink);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transform: rotate(2deg);
+    }
+    .id-card::before {
+      content: "";
+      position: absolute;
+      width: 68px;
+      height: 14px;
+      border-radius: 999px;
+      background: #e8eef8;
+      left: 50%;
+      top: 18px;
+      transform: translateX(-50%);
+    }
+    .strap {
+      position: absolute;
+      left: 50%;
+      top: -135px;
+      transform: translateX(-50%);
+      width: 58px;
+      height: 155px;
+      border-radius: 0 0 24px 24px;
+      background: linear-gradient(#216be0, #4b97ff);
+      opacity: .85;
+    }
+    .avatar {
+      width: 116px;
+      height: 116px;
+      margin: 34px auto 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #dfefff, #a7d1ff);
+      display: grid;
+      place-items: center;
+      font-size: 42px;
+      font-weight: 950;
+      color: #1f68d8;
+      border: 8px solid #f5f9ff;
+    }
+    .id-card h2 { text-align: center; margin: 0; font-size: 30px; letter-spacing: -.04em; }
+    .id-card .role { text-align: center; color: var(--blue); font-weight: 900; margin-top: 4px; }
+    .id-lines { display: grid; gap: 10px; margin-top: 26px; }
+    .id-line { display: flex; justify-content: space-between; gap: 18px; border-top: 1px solid #edf1f6; padding-top: 10px; color: var(--gray); font-size: 14px; }
+    .id-line strong { color: var(--ink); }
+
+    .section { padding: 96px 0; }
+    .section.dark { background: var(--bg); color: var(--text); }
+    .section-head {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+    .num {
+      font-size: clamp(78px, 10vw, 130px);
+      line-height: .78;
+      font-weight: 950;
+      color: transparent;
+      -webkit-text-stroke: 1.7px currentColor;
+      opacity: .38;
+      letter-spacing: -.08em;
+    }
+    .section.dark .num { color: #fff; }
+    .section:not(.dark) .num { color: #111; }
+    .section-title h2 {
+      margin: 0 0 12px;
+      font-size: clamp(32px, 4.6vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -.055em;
+    }
+    .section-title p { margin: 0; color: var(--muted); max-width: 760px; word-break: keep-all; }
+    .section:not(.dark) .section-title p { color: #667085; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .card {
+      background: #fff;
+      border: 1px solid #e7edf5;
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: 0 12px 35px rgba(17, 24, 39, .06);
+    }
+    .dark .card {
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.12);
+      box-shadow: none;
+    }
+    .card h3 { margin: 0 0 12px; font-size: 21px; letter-spacing: -.03em; }
+    .card p { margin: 0; color: #697586; word-break: keep-all; }
+    .dark .card p { color: rgba(255,255,255,.68); }
+    .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      background: #eef5ff;
+      color: #216be0;
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .dark .tag { background: rgba(63,140,255,.18); color: #b8d7ff; }
+
+    .timeline { display: grid; gap: 14px; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 18px;
+      padding: 18px;
+      border-radius: 18px;
+      background: #f8fbff;
+      border: 1px solid #e8eff8;
+    }
+    .date { color: var(--blue); font-weight: 950; letter-spacing: -.02em; }
+    .timeline-item strong { display: block; margin-bottom: 6px; }
+    .timeline-item span { color: #64748b; font-size: 14px; }
+
+    .skill-card { padding: 18px; border-radius: 18px; background: #fff; border: 1px solid #e7edf5; }
+    .skill-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 11px; }
+    .skill-name { font-weight: 900; }
+    .skill-level { color: var(--blue); font-weight: 900; font-size: 12px; }
+    .bar { height: 9px; border-radius: 999px; background: #e8eef6; overflow: hidden; }
+    .bar span { display: block; height: 100%; width: var(--v); background: linear-gradient(90deg, var(--blue), var(--blue-2)); border-radius: inherit; }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 14px; }
+    .kpi {
+      min-height: 132px;
+      padding: 20px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #fff, #f8fbff);
+      border: 1px solid #e8eff8;
+    }
+    .kpi small { color: #718096; font-weight: 850; }
+    .kpi strong { display: block; margin-top: 12px; font-size: 34px; line-height: 1; letter-spacing: -.05em; }
+    .kpi span { display: block; margin-top: 8px; color: var(--gray); font-size: 13px; }
+
+    .portfolio-panel {
+      margin-top: 24px;
+      background: #fff;
+      border: 1px solid #e7edf5;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 16px 45px rgba(17,24,39,.07);
+    }
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 22px;
+      border-bottom: 1px solid #edf1f6;
+      background: #fbfdff;
+    }
+    .panel-head strong { font-size: 18px; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      border: 1px solid #d9e4f3;
+      background: #fff;
+      color: #526071;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+    .filter-btn.active { border-color: var(--blue); background: #edf5ff; color: #216be0; }
+    .case-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .case-table th, .case-table td { padding: 15px 18px; border-bottom: 1px solid #edf1f6; text-align: left; vertical-align: top; }
+    .case-table th { color: #64748b; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; background: #fbfdff; }
+    .case-table tr:last-child td { border-bottom: 0; }
+    .pill { display: inline-flex; align-items: center; justify-content: center; min-height: 26px; padding: 0 9px; border-radius: 999px; font-size: 12px; font-weight: 900; }
+    .pill.high { background: #fff3e0; color: #b35a00; }
+    .pill.medium { background: #eaf4ff; color: #2067c8; }
+    .pill.pass { background: #e9fbf0; color: #118544; }
+
+    .split-line {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .metric-line {
+      padding: 18px;
+      border-radius: 18px;
+      background: #f7faff;
+      border: 1px solid #e4edf8;
+    }
+    .metric-line b { display: flex; justify-content: space-between; margin-bottom: 10px; }
+    .metric-line .bar { height: 12px; }
+
+    .bug-layout { display: grid; grid-template-columns: .82fr 1.18fr; gap: 22px; align-items: start; }
+    .bug-ticket {
+      background: #111316;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 26px;
+      padding: 26px;
+      color: #fff;
+      position: sticky;
+      top: 92px;
+    }
+    .bug-ticket .key { color: var(--blue-2); font-weight: 950; font-size: 13px; letter-spacing: .06em; }
+    .bug-ticket h3 { font-size: 29px; line-height: 1.22; margin: 14px 0 18px; letter-spacing: -.04em; }
+    .bug-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+    .bug-meta div { padding: 12px; border-radius: 14px; background: rgba(255,255,255,.07); color: rgba(255,255,255,.72); font-size: 13px; }
+    .bug-meta strong { display: block; color: #fff; margin-top: 3px; }
+    .steps { counter-reset: step; display: grid; gap: 12px; }
+    .step {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .step::before {
+      content: counter(step);
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 950;
+    }
+    .expected {
+      border-left: 5px solid var(--blue);
+      padding: 18px 20px;
+      background: rgba(63,140,255,.10);
+      border-radius: 0 18px 18px 0;
+      color: rgba(255,255,255,.78);
+      margin-top: 20px;
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .road {
+      position: relative;
+      padding: 24px;
+      min-height: 210px;
+      border-radius: 24px;
+      background: #fff;
+      border: 1px solid #e7edf5;
+    }
+    .road b { display: block; color: var(--blue); font-size: 14px; margin-bottom: 10px; }
+    .road h3 { margin: 0 0 10px; }
+    .road p { color: #697586; margin: 0; }
+
+    footer {
+      background: #0f1114;
+      color: rgba(255,255,255,.72);
+      padding: 42px 0;
+      text-align: center;
+    }
+    .note {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #fff7e6;
+      color: #7a4c00;
+      border: 1px solid #ffe0a3;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .grid-2, .bug-layout { grid-template-columns: 1fr; }
+      .id-card { margin: 30px auto 0; }
+      .kpi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .grid-3, .grid-4, .roadmap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .section-head { grid-template-columns: 1fr; }
+      .num { font-size: 84px; }
+      .bug-ticket { position: relative; top: auto; }
+    }
+    @media (max-width: 680px) {
+      .topbar .wrap { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+      nav { justify-content: flex-start; }
+      .hero { min-height: auto; }
+      .hero-grid { padding: 56px 0; gap: 30px; }
+      .grid-3, .grid-4, .kpi-grid, .roadmap, .split-line { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; }
+      .panel-head { align-items: flex-start; flex-direction: column; }
+      .case-table { min-width: 780px; }
+      .table-scroll { overflow-x: auto; }
+      .bug-meta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="Portfolio Home">
+        <span class="brand-mark">QA</span>
+        <span>JEONG JI HUN</span>
+      </a>
+      <nav aria-label="Portfolio navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#portfolio">29CM TC</a>
+        <a href="#bug">Bug Report</a>
+        <a href="#goals">Goals</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Software Testing Engineer Portfolio Mockup</span>
+          <h1>사용자의 흐름을<br><span class="blue">검증 가능한 기준</span>으로<br>바꾸는 QA 지원자</h1>
+          <p>
+            사회복지 현장에서 운영 기록과 프로그램 데이터를 관리하며 쌓은 꼼꼼함을 기반으로,
+            29CM 웹 서비스의 상세페이지·장바구니·검색 기능을 테스트케이스와 버그 리포트로 구조화했습니다.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#portfolio">테스트케이스 보기</a>
+            <a class="btn" href="#bug">버그리포트 보기</a>
+            <a class="btn" href="#skills">도구 역량 보기</a>
+          </div>
+        </div>
+
+        <aside class="id-card" aria-label="Candidate card">
+          <div class="strap"></div>
+          <div class="avatar">JH</div>
+          <h2>정지훈</h2>
+          <div class="role">S/W Test & QA Engineer</div>
+          <div class="id-lines">
+            <div class="id-line"><span>Portfolio</span><strong>QA Mockup</strong></div>
+            <div class="id-line"><span>Focus</span><strong>Web · Functional · UI</strong></div>
+            <div class="id-line"><span>Contact</span><strong>jjh00914608@gmail.com</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="num">01</div>
+          <div class="section-title">
+            <h2>About Me</h2>
+            <p>운영 데이터 관리 경험을 QA 관점으로 재해석하여, 누락·오류·사용자 불편을 발견하고 문서화하는 역량을 강조했습니다.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>경력 기반 강점</h3>
+            <p>
+              지역아동센터와 시니어클럽에서 행정·프로그램 운영·기록 관리를 수행하며 사용자와 운영자의 상황을 함께 고려하는 시야를 길렀습니다.
+              QA 직무에서는 이 경험을 요구사항 확인, 테스트 기록 관리, 이슈 커뮤니케이션으로 연결할 수 있습니다.
+            </p>
+            <div class="tag-row">
+              <span class="tag">운영 데이터 관리</span>
+              <span class="tag">기록 누락 점검</span>
+              <span class="tag">이상 징후 대응</span>
+              <span class="tag">협업 커뮤니케이션</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>교육 및 전환 포인트</h3>
+            <p>
+              AI 활용 SW 테스팅 전문가 과정에서 테스트 시나리오, 테스트케이스, 버그리포트 작성과 Jira·GitHub·Jenkins 기반 협업 흐름을 학습했습니다.
+              포트폴리오에서는 실제 쇼핑 서비스 화면을 기준으로 실행 가능한 케이스를 구성했습니다.
+            </p>
+            <div class="tag-row">
+              <span class="tag">AI 활용 SW 테스팅</span>
+              <span class="tag">220시간</span>
+              <span class="tag">Manual QA</span>
+              <span class="tag">Portfolio v1.0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:22px;">
+          <h3>Career Timeline</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="date">2026.03 — 2026.06</div>
+              <div><strong>AI 활용 SW 테스팅 전문가 과정</strong><span>테스트 케이스 작성, 테스트 시나리오 생성, 생성형 AI 기반 오류 분석, 버그리포트 작성</span></div>
+            </div>
+            <div class="timeline-item">
+              <div class="date">2024.07 — 2026.01</div>
+              <div><strong>빛나라소하지역아동센터 · 생활복지사</strong><span>프로그램 운영, 행정, 아동 학습지도, 운영 기록 관리 및 모니터링 기반 문제 대응</span></div>
+            </div>
+            <div class="timeline-item">
+              <div class="date">2022.01 — 2022.05</div>
+              <div><strong>광명시니어클럽 · 사회복지사</strong><span>노인일자리 연계 및 행정 업무 수행</span></div>
+            </div>
+            <div class="timeline-item">
+              <div class="date">2019.03 — 2021.02</div>
+              <div><strong>오산대학교 사회복지학과 졸업</strong><span>GPA 3.44 / 4.5</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="skills">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="num">02</div>
+          <div class="section-title">
+            <h2>QA Tool Stack</h2>
+            <p>현재 활용 수준은 중간 단계로 설정했습니다. 단순 나열보다 “어떤 QA 업무에 어떻게 활용할 수 있는지”가 보이도록 구성했습니다.</p>
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <div class="skill-card"><div class="skill-top"><span class="skill-name">Excel</span><span class="skill-level">Intermediate</span></div><div class="bar"><span style="--v:70%"></span></div></div>
+          <div class="skill-card"><div class="skill-top"><span class="skill-name">Jira</span><span class="skill-level">Intermediate</span></div><div class="bar"><span style="--v:65%"></span></div></div>
+          <div class="skill-card"><div class="skill-top"><span class="skill-name">Postman</span><span class="skill-level">Intermediate</span></div><div class="bar"><span style="--v:60%"></span></div></div>
+          <div class="skill-card"><div class="skill-top"><span class="skill-name">Git/GitHub</span><span class="skill-level">Intermediate</span></div><div class="bar"><span style="--v:60%"></span></div></div>
+          <div class="skill-card"><div class="skill-top"><span class="skill-name">Jenkins</span><span class="skill-level">Intermediate</span></div><div class="bar"><span style="--v:55%"></span></div></div>
+          <div class="skill-card"><div class="skill-top"><span class="skill-name">Playwright</span><span class="skill-level">Intermediate</span></div><div class="bar"><span style="--v:55%"></span></div></div>
+          <div class="skill-card"><div class="skill-top"><span class="skill-name">SQL</span><span class="skill-level">Intermediate</span></div><div class="bar"><span style="--v:60%"></span></div></div>
+          <div class="skill-card"><div class="skill-top"><span class="skill-name">ADB</span><span class="skill-level">Intermediate</span></div><div class="bar"><span style="--v:55%"></span></div></div>
+        </div>
+
+        <div class="grid-3" style="margin-top:22px;">
+          <div class="card"><h3>Test Design</h3><p>실제 화면 기준으로 정상·예외·경계 케이스를 구분하고, 사전조건과 기대결과를 Step 단위로 분리합니다.</p></div>
+          <div class="card"><h3>Issue Reporting</h3><p>환경, 발생 빈도, 재현 스텝, 기대 결과를 분리하여 개발자가 재현 가능한 형태로 이슈를 작성합니다.</p></div>
+          <div class="card"><h3>Dashboard Thinking</h3><p>PASS율, Priority, 리스크 케이스를 지표화해 테스트 수행 현황을 한눈에 이해할 수 있도록 정리합니다.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="portfolio">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="num">03</div>
+          <div class="section-title">
+            <h2>29CM Test Case Portfolio</h2>
+            <p>상세페이지·장바구니·검색 기능을 대상으로 작성한 시나리오 테스트케이스와 Power BI 스타일 대시보드 지표를 웹 포트폴리오용으로 재구성했습니다.</p>
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi"><small>Total TC</small><strong>34</strong><span>Distinct test cases</span></div>
+          <div class="kpi"><small>Total Steps</small><strong>90</strong><span>Step-level executions</span></div>
+          <div class="kpi"><small>Step PASS</small><strong>100%</strong><span>90 / 90 PASS</span></div>
+          <div class="kpi"><small>Case PASS</small><strong>100%</strong><span>34 / 34 PASS</span></div>
+          <div class="kpi"><small>High Priority</small><strong>22</strong><span>Core flows</span></div>
+          <div class="kpi"><small>Risk Cases</small><strong>0</strong><span>Fail / Blocked / Not Run</span></div>
+        </div>
+
+        <div class="split-line">
+          <div class="metric-line"><b><span>상세페이지</span><span>13 steps</span></b><div class="bar"><span style="--v:14.4%"></span></div></div>
+          <div class="metric-line"><b><span>장바구니</span><span>25 steps</span></b><div class="bar"><span style="--v:27.8%"></span></div></div>
+          <div class="metric-line"><b><span>검색 기능</span><span>52 steps</span></b><div class="bar"><span style="--v:57.8%"></span></div></div>
+        </div>
+
+        <div class="portfolio-panel">
+          <div class="panel-head">
+            <strong>Scenario Test Case Samples</strong>
+            <div class="filters" aria-label="case filters">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="상세페이지">상세페이지</button>
+              <button class="filter-btn" data-filter="장바구니">장바구니</button>
+              <button class="filter-btn" data-filter="검색 기능">검색 기능</button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="case-table">
+              <thead>
+                <tr><th>Key</th><th>Service</th><th>Scenario</th><th>Priority</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr data-service="상세페이지"><td>29CM-PDP-001</td><td>상세페이지</td><td>상품 상세 기본 정보 표시 확인</td><td><span class="pill high">High</span></td><td><span class="pill pass">PASS</span></td></tr>
+                <tr data-service="상세페이지"><td>29CM-PDP-003</td><td>상세페이지</td><td>상품 옵션 드롭다운 선택 확인</td><td><span class="pill high">High</span></td><td><span class="pill pass">PASS</span></td></tr>
+                <tr data-service="상세페이지"><td>29CM-PDP-004</td><td>상세페이지</td><td>옵션 미선택 상태 장바구니 담기 제한 확인</td><td><span class="pill high">High</span></td><td><span class="pill pass">PASS</span></td></tr>
+                <tr data-service="장바구니"><td>29CM-CART-002</td><td>장바구니</td><td>상품 수량 증가 및 금액 갱신 확인</td><td><span class="pill high">High</span></td><td><span class="pill pass">PASS</span></td></tr>
+                <tr data-service="장바구니"><td>29CM-CART-003</td><td>장바구니</td><td>수량 1개 상태 감소 제한 확인</td><td><span class="pill high">High</span></td><td><span class="pill pass">PASS</span></td></tr>
+                <tr data-service="장바구니"><td>29CM-CART-012</td><td>장바구니</td><td>상품 미선택 상태 결제 제한 확인</td><td><span class="pill high">High</span></td><td><span class="pill pass">PASS</span></td></tr>
+                <tr data-service="검색 기능"><td>29CM-SCH-001</td><td>검색 기능</td><td>검색 아이콘 클릭 시 검색 오버레이 노출 확인</td><td><span class="pill high">High</span></td><td><span class="pill pass">PASS</span></td></tr>
+                <tr data-service="검색 기능"><td>29CM-SCH-005</td><td>검색 기능</td><td>검색어 입력 시 자동완성 추천어 노출 확인</td><td><span class="pill high">High</span></td><td><span class="pill pass">PASS</span></td></tr>
+                <tr data-service="검색 기능"><td>29CM-SCH-011</td><td>검색 기능</td><td>이벤트 필터 선택 시 결과 반영 확인</td><td><span class="pill high">High</span></td><td><span class="pill pass">PASS</span></td></tr>
+                <tr data-service="검색 기능"><td>29CM-SCH-016</td><td>검색 기능</td><td>특수문자 검색어 입력 시 화면 안정성 확인</td><td><span class="pill medium">Medium</span></td><td><span class="pill pass">PASS</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="bug">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="num">04</div>
+          <div class="section-title">
+            <h2>Bug Report Case</h2>
+            <p>Jira 이슈 형태의 버그 리포트를 웹 포트폴리오 카드로 재구성했습니다. 핵심은 “개발자가 바로 재현할 수 있는 정보 구조”입니다.</p>
+          </div>
+        </div>
+
+        <div class="bug-layout">
+          <aside class="bug-ticket">
+            <div class="key">KAN-7 · UI Consistency</div>
+            <h3>모달 팝업 내 확인 버튼 UI 크기 및 배치가 화면별로 일관되지 않음</h3>
+            <p>동일한 확인 CTA 버튼이 팝업 유형에 따라 서로 다른 크기와 정렬로 노출되어, 서비스 내 UI 규칙이 일관되지 않아 보이는 현상입니다.</p>
+            <div class="bug-meta">
+              <div>Status<strong>해야 할 일</strong></div>
+              <div>Priority<strong>Low</strong></div>
+              <div>Frequency<strong>항상 발생</strong></div>
+              <div>Reporter<strong>정지훈</strong></div>
+            </div>
+          </aside>
+
+          <div>
+            <div class="card">
+              <h3>Test Environment</h3>
+              <p>29CM 웹 서비스 · Desktop PC · Windows 10/11 · Microsoft Edge 또는 Chrome · 로그인 상태 · 일반 사용자 계정</p>
+              <div class="tag-row">
+                <span class="tag">Web</span><span class="tag">Desktop</span><span class="tag">Modal UI</span><span class="tag">CTA Button</span>
+              </div>
+            </div>
+            <div class="card" style="margin-top:18px;">
+              <h3>Reproduction Flow</h3>
+              <div class="steps">
+                <div class="step"><div>29CM 웹 서비스에 접속 후 로그인 또는 계정 관련 페이지로 이동합니다.</div></div>
+                <div class="step"><div>무신사 통합계정 안내 팝업의 확인 버튼 크기와 배치를 확인합니다.</div></div>
+                <div class="step"><div>상품 상세 페이지에서 옵션을 선택하지 않은 상태로 구매 또는 장바구니 관련 버튼을 클릭합니다.</div></div>
+                <div class="step"><div>“상품 옵션을 선택해주세요.” 안내 팝업의 확인 버튼 크기와 배치를 비교합니다.</div></div>
+              </div>
+              <div class="expected">
+                <strong>Expected Result</strong><br>
+                동일 서비스 내 모달 팝업의 확인 버튼은 동일하거나 유사한 높이, 너비, 정렬 방식으로 표시되어야 하며, 팝업 유형별 버튼 스타일 가이드가 명확해야 합니다.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="goals">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="num">05</div>
+          <div class="section-title">
+            <h2>Growth Roadmap</h2>
+            <p>현재 포트폴리오는 Manual QA 기반입니다. 이후 API 검증, 자동화, 배포 파이프라인 이해로 확장 가능한 구조로 목표를 잡았습니다.</p>
+          </div>
+        </div>
+        <div class="roadmap">
+          <div class="road"><b>STEP 01</b><h3>Manual QA 기본기</h3><p>요구사항 분석, 테스트케이스 설계, 재현 가능한 버그 리포트 작성 완성도 향상</p></div>
+          <div class="road"><b>STEP 02</b><h3>API Testing</h3><p>Postman으로 요청·응답 검증, 상태 코드, 예외 응답, 데이터 정합성 확인</p></div>
+          <div class="road"><b>STEP 03</b><h3>Automation</h3><p>Playwright 기반 핵심 사용자 흐름 자동화와 회귀 테스트 구조 이해</p></div>
+          <div class="road"><b>STEP 04</b><h3>CI/CD 협업</h3><p>Git/GitHub, Jenkins를 활용한 테스트 실행 흐름과 리포트 공유 방식 학습</p></div>
+        </div>
+        <div class="note">공개 배포 전에는 전화번호, 상세 주소, 생년월일 등 개인정보 노출 여부를 반드시 다시 확인하는 것을 권장합니다.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <strong>정지훈 · S/W Test & QA Engineer Portfolio Mockup</strong><br>
+      HTML prototype for future atoms.dev deployment
+    </div>
+  </footer>
+
+  <script>
+    const navLinks = [...document.querySelectorAll('nav a')];
+    const sections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const setActive = () => {
+      let current = sections[0]?.id;
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top < 140) current = section.id;
+      });
+      navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + current));
+    };
+    window.addEventListener('scroll', setActive, { passive: true });
+    setActive();
+
+    const filterButtons = [...document.querySelectorAll('.filter-btn')];
+    const caseRows = [...document.querySelectorAll('.case-table tbody tr')];
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        button.classList.add('active');
+        const filter = button.dataset.filter;
+        caseRows.forEach(row => {
+          row.style.display = filter === 'all' || row.dataset.service === filter ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
